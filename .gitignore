@@ -205,3 +205,46 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Model checkpoints and weights (can be large)
+*.pt
+*.pth
+*.ckpt
+models/checkpoints/
+
+# Lava/neuromorphic framework outputs
+*.lava
+*.loihi
+
+# Squiggler outputs
+*.blow5
+*.slow5
+*.fast5
+*.pod5
+
+# Results and figures (generated programmatically)
+results/
+figures/
+*.png
+*.pdf
+*.svg
+
+# IDE and editor files
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Environment variables (never commit secrets)
+.env
+*.env
+
+# Logs
+*.log
+logs/
+
+# Coverage reports
+htmlcov/
+.coverage
