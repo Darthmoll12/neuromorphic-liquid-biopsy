@@ -2,10 +2,10 @@
 
 ## End-motif SNN Channel Classification Test
 
-Seventeen categories corresponding to seventeen different 5' 4-mer sequences were chosen as follows:
+Sixteen categories corresponding to sixteen different 5' 4-mer sequences were chosen as follows:
 
- CCCA, CCAG, CCTG, TAGA, AAAA, CCCC, GGGG, TTTT, ACGT, TGCA, GCAT, ATGC, AATT, TTAA, GGCC, CCGG, and AACG.
+ CCCA, CCAG, CCTG, TAGA, AAAA, CCCC, GGGG, TTTT, ACGT, TGCA, GCAT, ATGC, AATT, TTAA, GGCC, CCGG.
 
-Data was generated using squigulator (see [environment.md](environment.md)). All simulated cfDNA fragments were made with a length of 200bp (the minimum value for squigulator simulations). Each sequence was generated with 1,000 different reads, totalling 16,000 reads for this classification test data set.
+A python script was implemented to generate a FASTA file for each of the above motifs. Each FASTA file contained 1,000 individual sequences, each with a randomized internal sequence, for a total of 16,000 sequences. All sequences were made with a length of 200bp (the smalles length allowed for squigulator simulations). This was done to emulate real cfDNA fragment lengths observed in the bloodstream.
 
-The internal sequences of each read was randomized, mimicking real nanopore data from cfDNA.
+Following this, squiggle data was generated using squigulator (see [environment.md](environment.md)). Each sequence was generated with 1,000 different reads, totalling 16,000 reads for this classification test data set. Therefore, each generated sequence was given 1 read (1,000 reads for 1,000 sequences per motif). This allowed for simple tracking of ground truth for each sequence.
