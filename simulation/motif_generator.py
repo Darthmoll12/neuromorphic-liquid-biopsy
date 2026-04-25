@@ -43,7 +43,7 @@ def make_fasta_sequence(motif: str, num_reads: int, output_path: Path, seed: int
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argumenet("--out_dir", type=Path, required=True, help="Output directory to store FASTA files.")
+    parser.add_argument("--out_dir", type=Path, required=True, help="Output directory to store FASTA files.")
     parser.add_argument("--reads_per_motif", type=int, default=1000, help="Number of unique sequences generated per motif")
     parser.add_argument("--master_seed", type=int, default=MASTER_SEED, help=f"seed used to generate random internal sequences. Default: {MASTER_SEED}")
     args = parser.parse_args()
