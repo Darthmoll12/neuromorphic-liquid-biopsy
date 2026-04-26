@@ -222,6 +222,9 @@ models/checkpoints/
 *.fast5
 *.pod5
 
+#sequence files
+*.fa
+
 # Results and figures (generated programmatically)
 results/
 figures/
