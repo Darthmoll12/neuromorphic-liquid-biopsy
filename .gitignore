@@ -223,6 +223,7 @@ models/checkpoints/
 *.slow5
 *.fast5
 *.pod5
+*.paf
 
 #sequence files
 *.fa
