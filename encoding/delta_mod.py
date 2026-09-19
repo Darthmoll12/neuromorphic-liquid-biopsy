@@ -1,3 +1,4 @@
+import time
 from pathlib import Path
 
 import h5py
@@ -54,8 +55,9 @@ def create_spike_train(hdf5, delta_threshold: float):
             #back to (n_reads, max_len)
             spike_train = spike_train.squeeze(-1).T
 
-            #trim to raw_signal_length - 1 since tensor still includes the padded region.
-            trimmed_spike_train = [spike_train[i, :chunk_signal_lengths[i] - 1] for i in range(len(chunk_signal_lengths))]
+            #trim to raw_signal_length since tensor still includes the padded region.
+            #padding=True makes spikegen.delta preserve input length, so no "-1" here.
+            trimmed_spike_train = [spike_train[i, :chunk_signal_lengths[i]] for i in range(len(chunk_signal_lengths))]
             yield trimmed_spike_train, chunk_motifs
 
 
@@ -77,7 +79,11 @@ with h5py.File(spike_train_hdf5_file, "w") as f:
         chunks=True
     )
 
+    with h5py.File(hdf5_data_file, "r") as src:
+        total_reads = src["signal"].shape[0]
+
     idx = 0
+    start_time = time.perf_counter()
 
     for spike_train, motifs in create_spike_train(hdf5_data_file, delta_threshold=7.0):
         n = len(spike_train)
@@ -88,5 +94,10 @@ with h5py.File(spike_train_hdf5_file, "w") as f:
 
         dset_spike[idx:new_size] = [spike.numpy().astype(np.float32) for spike in spike_train]
         dset_motif[idx:new_size] = [motif for motif in motifs]
+
+        idx = new_size
+        elapsed = time.perf_counter() - start_time
+        pct = 100 * idx / total_reads
+        print(f"{idx}/{total_reads} reads ({pct:.1f}%) - {elapsed:.1f}s elapsed", flush=True)
 
 
