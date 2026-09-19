@@ -138,6 +138,8 @@ celerybeat.pid
 .env
 .envrc
 .venv
+.nova/
+.nova_env/
 env/
 venv/
 ENV/
@@ -224,6 +226,9 @@ models/checkpoints/
 *.fast5
 *.pod5
 *.paf
+
+# Generated HDF5 datasets (large, regenerable from source data)
+*.h5
 
 #sequence files
 *.fa

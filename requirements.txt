@@ -1,8 +1,0 @@
-# A list of dependencies used throughout the project.
-
-lava-nc
-numpy
-scipy
-pandas
-matplotlib
-jupyter
