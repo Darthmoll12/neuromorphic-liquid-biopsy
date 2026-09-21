@@ -16,6 +16,19 @@ string_type = h5py.string_dtype(encoding='utf-8')
 
 
 def create_spike_train(hdf5, delta_threshold: float):
+    """
+    Creates a .h5 file containing the spike train representation of the raw pA nanopore data.
+    .hf file structure:
+    |
+    |
+    --> Datasets:
+            -> spike_train
+            -> motifs
+    Threshold for delta modulation chosen to be 7pA. 
+    This allows for a roughly 13.5% spike rate. 
+    However, this hyperparameter may be tuned and performance at different thresholds may be tracked and recorded.
+    """
+
     # Use a starting threshold of 7pA.
     #This was determined by running determine_threshold.py over a series of random nanopore reads.
     with h5py.File(hdf5, "r") as f:
